@@ -3,6 +3,7 @@ package task.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -19,10 +20,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.io.IOError;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/main")
+@RequestMapping
 @Validated
 @RequiredArgsConstructor
 @Slf4j
@@ -41,8 +44,13 @@ public class TaskController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public String main() {
-        return "index.html";
+    @RequestMapping()
+    public ResponseEntity<Object> main() throws URISyntaxException {
+        URI redirectUri = new URI("http://fmktask.s3-website.ap-northeast-2.amazonaws.com");
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setLocation(redirectUri);
+        return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
     }
 }
+
+
