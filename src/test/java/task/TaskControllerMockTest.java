@@ -40,7 +40,7 @@ public class TaskControllerMockTest {
     @Test
     @PostMapping
     void postMemberTest() throws Exception {
-        MemberPostDtoTest post = new MemberPostDtoTest ("염빛나리", "bytenari@gmail.com", "82", "01053163253", "yes");
+        MemberPostDtoTest post = new MemberPostDtoTest ("염빛나리", "bytenari@gmail.com", "82", "01053163253", true);
 
         Member member = mapper.memberPostDtoTestToMember(post);
 
