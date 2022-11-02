@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Getter
@@ -25,7 +26,7 @@ public class MemberPostDto {
     @NotBlank(message = "Phone number cannot be blank.")
     private String phone;
 
-    @NotBlank(message = "Phone number cannot be blank.")
-    private String agreement;
+    @NotNull(message = "Only 'true' would be taken as answer to apply for the event.")
+    private Boolean agreement;
 
 }

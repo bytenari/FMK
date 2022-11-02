@@ -4,7 +4,7 @@ import lombok.Getter;
 
 public enum ExceptionCode {
 
-    AGREEMENT_NOT_VALID(400, "'yes' is only possible answer to apply");
+    AGREEMENT_NOT_VALID(400, "'True' is only possible answer to apply for the event.");
 
     @Getter
     private int status;

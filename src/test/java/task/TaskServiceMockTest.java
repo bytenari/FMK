@@ -25,7 +25,7 @@ public class TaskServiceMockTest {
     @Test
     public void createMemberTest() {
         // given
-        Member member = new Member(1L, "염빛나리", "bytenari@gmail.com", "8201053163253", "yes");
+        Member member = new Member(1L, "염빛나리", "bytenari@gmail.com", "82", "01053163253", "8201053163253", true);
 
         given(memberRepository.save(member))
                 .willReturn(member);

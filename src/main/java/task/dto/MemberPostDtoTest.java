@@ -3,10 +3,7 @@ package task.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Getter
 @AllArgsConstructor
@@ -26,6 +23,6 @@ public class MemberPostDtoTest { // 테스트를 위해 추가됨
     @NotBlank(message = "Phone number cannot be blank.")
     private String phone;
 
-    @NotBlank(message = "Phone number cannot be blank.")
-    private String agreement;
+    @NotNull(message = "Only 'true' would be taken as answer to apply for the event.")
+    private Boolean agreement;
 }
