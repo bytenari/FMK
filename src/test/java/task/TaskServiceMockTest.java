@@ -6,6 +6,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import task.entity.Member;
+import task.exception.BusinessLogicException;
+import task.exception.ExceptionCode;
 import task.repository.MemberRepository;
 import task.service.MemberService;
 
@@ -27,9 +29,9 @@ public class TaskServiceMockTest {
         // given
         Member member = new Member(1L, "염빛나리", "bytenari@gmail.com", "82", "01053163253", "8201053163253", true);
 
-        given(memberRepository.save(member))
-                .willReturn(member);
+        given(memberRepository.findByEmail(member.getEmail()))
+                .willReturn(Optional.of(member));
 
-        memberService.createMember(member);
+        assertThrows(BusinessLogicException.class, () -> memberService.createMember(member));
     }
 }
