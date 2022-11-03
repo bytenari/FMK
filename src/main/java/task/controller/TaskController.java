@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import task.Mapper.MemberMapper;
 import task.dto.MemberPostDto;
 import task.dto.MultiResponseDto;
+import task.dto.SingleResponseDto;
 import task.entity.Member;
 import task.service.MemberService;
 import javax.validation.Valid;
@@ -36,6 +37,14 @@ public class TaskController {
         Member member = memberMapper.memberPostDtoToMember(memberPostDto);
         memberService.createMember(member);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{member-id}")
+    public ResponseEntity getMember(@PathVariable("member-id") @Positive Long memberId) {
+        Member member = memberService.findMember(memberId);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(memberMapper.memberToMemberResponse(member))
+                , HttpStatus.OK);
     }
 
     @GetMapping

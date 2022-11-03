@@ -77,6 +77,21 @@ public class MemberService {
             throw new BusinessLogicException(ExceptionCode.PHONE_EXISTS);
     }
 
+    @Transactional(readOnly = true)
+    public Member findMember(long memberId) {
+        return findVerifiedMember(memberId);
+    }
+
+    @Transactional(readOnly = true)
+    public Member findVerifiedMember(long memberId) {
+        Optional<Member> optionalMember =
+                memberRepository.findById(memberId);
+        Member findMember =
+                optionalMember.orElseThrow(() ->
+                        new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        return findMember;
+    }
+
     public Page<Member> findMembers(int page, int size) {
         return memberRepository.findAll(PageRequest.of(page, size, Sort.by("memberId")));
     }

@@ -12,7 +12,7 @@ import java.util.List;
 public interface MemberMapper {
     Member memberPostDtoToMember(MemberPostDto memberPostDto);
     Member memberPostDtoTestToMember(MemberPostDtoTest memberPostDtoTest);
-
+    MemberResponseDto memberToMemberResponse(Member member);
     List<MemberResponseDto> membersToMemberResponses(List<Member> members);
 
 //    default Member memberPostDtoToMember(MemberPostDto memberPostDto) {
