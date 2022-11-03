@@ -23,7 +23,7 @@ public class Member {
 
     @Column(length = 15, nullable = false, updatable = false)
     @NotBlank
-    @Size
+    @Size(min = 2, max = 15)
     private String username;
 
     @Column(nullable = false, unique = true)
@@ -32,11 +32,11 @@ public class Member {
     private String email;
 
     @NotBlank
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String countryCode;
 
     @NotBlank
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String phone;
 
     @NotBlank

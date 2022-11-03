@@ -4,7 +4,9 @@ import lombok.Getter;
 
 public enum ExceptionCode {
 
-    AGREEMENT_NOT_VALID(400, "'True' is only possible answer to apply for the event.");
+    AGREEMENT_NOT_VALID(400, "'True' is only possible answer to apply for the event."),
+    EMAIL_EXISTS(409, "This email already exists in database."),
+    PHONE_EXISTS(409, "This phone number already exists in database.");
 
     @Getter
     private int status;
