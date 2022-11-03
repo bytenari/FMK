@@ -3,15 +3,19 @@ package task.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import task.Mapper.MemberMapper;
 import task.dto.MemberPostDto;
+import task.dto.MultiResponseDto;
 import task.entity.Member;
 import task.service.MemberService;
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+import java.util.List;
 
 
 @RestController
@@ -32,6 +36,17 @@ public class TaskController {
         Member member = memberMapper.memberPostDtoToMember(memberPostDto);
         memberService.createMember(member);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity getMembers(@Positive @RequestParam int page,
+                                     @Positive @RequestParam int size) {
+        Page<Member> pageMembers = memberService.findMembers(page - 1, size);
+        List<Member> members = pageMembers.getContent();
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(memberMapper.membersToMemberResponses(members),
+                        pageMembers),
+                HttpStatus.OK);
     }
 }
 

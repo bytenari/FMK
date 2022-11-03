@@ -2,13 +2,18 @@ package task.Mapper;
 import org.mapstruct.Mapper;
 import task.dto.MemberPostDto;
 import task.dto.MemberPostDtoTest;
+import task.dto.MemberResponseDto;
 import task.entity.Member;
+
+import java.util.List;
 
 
 @Mapper(componentModel = "spring")
 public interface MemberMapper {
     Member memberPostDtoToMember(MemberPostDto memberPostDto);
     Member memberPostDtoTestToMember(MemberPostDtoTest memberPostDtoTest);
+
+    List<MemberResponseDto> membersToMemberResponses(List<Member> members);
 
 //    default Member memberPostDtoToMember(MemberPostDto memberPostDto) {
 //        String phoneWithCode = memberPostDto.getCountryCode() + memberPostDto.getPhone();

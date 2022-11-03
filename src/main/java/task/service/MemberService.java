@@ -1,5 +1,8 @@
 package task.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import task.dto.MemberPostDto;
@@ -29,6 +32,7 @@ public class MemberService {
         verifyExistPhone(member.getPhoneWithCode());
         return memberRepository.save(member);
     }
+
 
     // 동의서가 false이면 예외처리
     public void agreementYes(Member member) {
@@ -71,6 +75,10 @@ public class MemberService {
 
         if (checkPhone.isPresent())
             throw new BusinessLogicException(ExceptionCode.PHONE_EXISTS);
+    }
+
+    public Page<Member> findMembers(int page, int size) {
+        return memberRepository.findAll(PageRequest.of(page, size, Sort.by("memberId")));
     }
 }
 
